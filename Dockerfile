@@ -1,17 +1,11 @@
-FROM node:8.12.0-alpine
+FROM ubuntu:16:04
 
-WORKDIR /srv
+RUN apt-get update && apt-get install -y python python-pip
 
-# Default Port
-ARG NODE_PORT=8000
+RUN pip install flask
 
-ENV NODE_PORT="${NODE_PORT}"
-ENV NODE_HOST "0.0.0.0"
+COPY hello.py /opt/
 
-COPY package.json /srv
+ENTRYPOINT FLASK_APP=/opt/hello.py flask_run --host=0.0.0.0 --port=8080
 
-COPY . /srv
 
-EXPOSE "${NODE_PORT}"
-
-CMD ["npm", "start"]
