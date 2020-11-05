@@ -1,4 +1,4 @@
-FROM docker.io/ubuntu:16:04
+FROM docker.io/ubuntu:latest
 
 RUN apt-get update && apt-get install -y python python-pip
 
